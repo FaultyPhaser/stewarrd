@@ -37,6 +37,7 @@ process.env.SEERR_API_KEY = 'x';
 process.env.ADMIN_USER_ID = '1';
 process.env.MIN_STEWARDSHIP_DAYS = '0'; // these tests release items right after requesting them
 process.env.ADMIN_RUN = '1';
+process.env.WEBHOOK_SECRET = 's';
 process.env.DEFAULT_CREDITS = '10';
 process.env.CREDIT_COST_MOVIE = '1';
 process.env.CREDIT_COST_TV_SEASON = '3';
