@@ -1,0 +1,15 @@
+/* Design tokens shared by the dashboard and the UI injected into Seerr. Prefixed so they never clash with Seerr. */
+:root {
+  --sc-accent: #7a5818;
+  --sc-accent-dark: #46320d;
+  --sc-danger: #b91c1c;
+  --sc-warn: #b45309;
+  --sc-muted-bg: #4b5563;
+  --sc-bg: #111827;
+  --sc-surface: #001700;
+  --sc-border: #374151;
+  --sc-text: #e5e7eb;
+  --sc-text-strong: #fff;
+  --sc-text-dim: #9ca3af;
+  --sc-error-text: #fca5a5;
+}

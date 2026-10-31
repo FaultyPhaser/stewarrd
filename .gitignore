@@ -1,0 +1,12 @@
+node_modules/
+data/
+data-dev/
+data-real/
+.env
+*.log
+
+# Built by `npm run build:web` from web/
+public/dashboard.js
+public/dashboard.css
+public/inject.js
+public/inject.css

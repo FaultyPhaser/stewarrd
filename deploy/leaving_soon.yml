@@ -1,0 +1,28 @@
+# Kometa has no "url_json" builder. Use `text_file` with a URL: one id per line.
+# Put the movies block in a collection file for your Movies library and the shows block in
+# one for your TV Shows library. Replace the host with one Kometa can reach
+# (e.g. http://<UNRAID-IP>:3055).
+
+# --- Movies library ---
+collections:
+  Leaving Soon:
+    text_file: http://stewarrd:3000/api/kometa/leaving-soon-movies.txt
+    sync_mode: sync
+    summary: Media scheduled for removal at the end of the month unless claimed.
+    overlay:
+      name: leaving_soon_badge
+      git: PMM/overlays/leaving_soon
+    visible_home: true
+    visible_shared: true
+
+# --- TV Shows library (separate file) ---
+# collections:
+#   Leaving Soon:
+#     text_file: http://stewarrd:3000/api/kometa/leaving-soon-shows.txt
+#     sync_mode: sync
+#     summary: Media scheduled for removal at the end of the month unless claimed.
+#     overlay:
+#       name: leaving_soon_badge
+#       git: PMM/overlays/leaving_soon
+#     visible_home: true
+#     visible_shared: true

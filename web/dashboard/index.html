@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stewarrd (dev)</title>
+</head>
+<!-- Dev-only page for `npm run dev:web` (hot reload). Production uses src/views/dashboard.ejs. The API and images
+     go through Vite's /sidecar-* proxies to the running sidecar. The two flags are filled in from the environment. -->
+<body data-api="/sidecar-api" data-asset-base="/sidecar-assets" data-dev-mode="__DEV_MODE__" data-admin-run="__ADMIN_RUN__" data-fake-login="true">
+  <div id="app"></div>
+  <script type="module" src="/web/dashboard/main.tsx"></script>
+</body>
+</html>

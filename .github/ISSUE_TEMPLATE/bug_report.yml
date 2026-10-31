@@ -1,0 +1,41 @@
+name: Bug report
+description: Something isn't working
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Security problems: please use **Security → Report a vulnerability** instead of a public issue.
+        Remove API keys, tokens, domains and usernames from anything you paste.
+  - type: input
+    id: version
+    attributes:
+      label: Stewarrd version
+      placeholder: 0.1.0-alpha.1
+    validations:
+      required: true
+  - type: input
+    id: stack
+    attributes:
+      label: Seerr / Radarr / Sonarr versions
+      placeholder: Jellyseerr 2.x, Radarr 5.x, Sonarr 4.x
+  - type: dropdown
+    id: deploy
+    attributes:
+      label: Deployment
+      options: [Docker Compose, Plain Docker, Unraid, Other]
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant container logs
+      render: text

@@ -1,0 +1,190 @@
+@import '../shared/tokens.css';
+
+/* Everything injected into Seerr is prefixed `sc-` so it cannot clash with Seerr's Tailwind classes. */
+:root {
+  --sc-bar-width: 80px;
+  --sc-z-drawer: 2147483200;
+  --sc-z-tab: 2147483600;
+  --sc-z-modal: 2147483600;
+}
+
+/* Room for the side bar: shift Seerr's normal flow, and pull its fixed top search bar in from the right edge.
+   Deliberately not a blanket `.fixed` rule: that also hits Seerr's overlays and wrappers and can break clicks. */
+html.sc-bar-active { margin-right: var(--sc-bar-width); }
+html.sc-bar-active .searchbar { right: var(--sc-bar-width); }
+
+/* Buttons */
+.sc-btn {
+  background: var(--sc-accent); color: var(--sc-text); border: 0; border-radius: 6px;
+  padding: 8px 14px; font-weight: 600; cursor: pointer; margin: 8px 0;
+  transition: all 0.25s;
+  &:hover {
+    background: var(--sc-accent-dark);
+  }
+}
+.sc-btn:disabled { background: var(--sc-muted-bg); cursor: not-allowed; }
+.sc-btn--small { padding: 4px 10px; font-size: 0.8rem; white-space: nowrap; margin: 0; }
+
+/* Panel on a title page */
+.sc-panel { display: flex; flex-direction: column; align-items: flex-start; }
+.sc-note { margin: 8px 0; padding: 8px 12px; border-radius: 6px; font-size: 0.9rem; color: var(--sc-text-strong); background: var(--sc-border); }
+.sc-note--warn { background: var(--sc-warn); }
+
+/* Release / Save button inside one of Seerr's season headers */
+.sc-season-action { display: inline-flex; align-items: center; margin-left: 0.5rem; }
+.sc-season-action .sc-btn { margin: 0; border-radius: 9999px; min-width: 5.5em; }
+
+/* Blocked-request modal */
+.sc-modal {
+  position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); z-index: var(--sc-z-modal);
+  display: flex; align-items: center; justify-content: center;
+}
+.sc-modal__box { background: var(--sc-surface); color: var(--sc-text-strong); border-radius: 10px; padding: 20px 24px; max-width: 420px; width: 90%; }
+.sc-modal__actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+
+/* Drawer */
+.sc-tab {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: var(--sc-bar-width);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75em;
+  background: var(--sc-surface);
+  color: var(--sc-text-strong);
+  border: 0;
+  border-left: 1px solid var(--sc-border);
+  padding: 1.5em 0.5em;
+  cursor: pointer;
+  z-index: var(--sc-z-tab);
+}
+.sc-tab img {
+  display: block;
+  width: 100%;
+  max-width: 70px;
+  height: auto;
+}
+.sc-tab__credits {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: center;
+}
+.sc-tab__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  width: 100%;
+  margin-top: 0.75em;
+  padding-top: 0.9em;
+  border-top: 1px solid var(--sc-border);
+}
+.sc-stat { display: flex; flex-direction: column; align-items: center; gap: 0.15em; text-align: center; }
+.sc-stat__icon { font-size: 1.4rem; line-height: 1; }
+.sc-stat__value { font-size: 1rem; font-weight: 700; white-space: nowrap; }
+.sc-stat__of { font-size: 0.8rem; font-weight: 400; line-height: 1.1; white-space: nowrap; color: var(--sc-text-dim); }
+.sc-drawer {
+  position: fixed; 
+  top: 0; 
+  right: var(--sc-bar-width); 
+  bottom: 0; 
+  width: min(600px, calc(100vw - var(--sc-bar-width))); 
+  background: var(--sc-surface); color: var(--sc-text-strong);
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.5); z-index: var(--sc-z-drawer); display: flex; flex-direction: column;
+  /* Closed: tucked under the bar (which sits above it), so it slides out from behind the bar. */
+  transition: transform 0.2s ease, visibility 0.2s; transform: translateX(100%); visibility: hidden; pointer-events: none;
+}
+.sc-drawer.is-open { transform: translateX(0); visibility: visible; pointer-events: auto; }
+
+.sc-drawer__body { padding: 12px 16px; overflow-y: auto; flex: 1; }
+.sc-balance { font-size: 1.4rem; font-weight: 700; }
+.sc-legend { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--sc-border); font-size: 0.8rem; color: var(--sc-text); }
+.sc-legend__item { display: inline-flex; align-items: center; gap: 6px; }
+.sc-action { display: inline-flex; align-items: center; gap: 8px; }
+.sc-avail { font-size: 1rem; line-height: 1; cursor: default; }
+.sc-heading { 
+  margin: 1.5em 0 0.5em; 
+  font-size: 1.2rem;
+  font-weight: 700; 
+  /* text-transform: uppercase;  */
+  /* letter-spacing: 0.05em;  */
+  color: var(--sc-text); 
+}
+.sc-empty { color: var(--sc-text); font-size: 0.9rem; }
+.sc-row {
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  gap: 8px; 
+  padding: 0.5em 0.5em 0.5em 1em;
+  /* border-bottom: 1px solid var(--sc-border); font-size: 0.9rem; */
+
+  &:hover {
+    background: color-mix(in srgb, var(--sc-surface) 100%, #fff 20%);
+  }
+}
+.sc-row--group { font-weight: 600; }
+.sc-row--child { padding-left: 12px; }
+
+/* Media list tools and scroll area */
+.sc-tools { display: flex; gap: 8px; align-items: center; margin: 6px 0; }
+.sc-select, .sc-search {
+  /* background: var(--sc-bg, var(--sc-surface));  */
+  background: rgba(0,0,0,0.3);
+  color: var(--sc-text-strong); 
+  border: 1px solid var(--sc-border);
+  border-radius: 999px; 
+  padding: 0.5em 1em; 
+  font-size: 0.85rem; 
+  line-height: 1.4; 
+  height: auto;
+}
+.sc-search { flex: 1; min-width: 0; }
+.sc-count { 
+  color: var(--sc-text); 
+  font-size: 0.8rem; 
+  white-space: nowrap;
+  margin-bottom: 1em;
+}
+.sc-scroll { 
+  max-height: 50vh; 
+  min-height: 10em; 
+  overflow-y: auto; 
+  /* background: rgba(0,0,0, 0.2); */
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+  border-radius: 0.75rem;
+  /* border: 1px solid var(--sc-border); border-radius: 6px; margin: 6px 0;  */
+
+  .sc-btn {
+    width: 10em;
+    border-radius: 9999px;
+  }
+}
+/* .sc-row--group { background: var(--sc-surface); } */
+.sc-toggle { background: none; border: 0; color: inherit; padding: 0; font: inherit; font-weight: 600; text-align: left; cursor: pointer; }
+.sc-row--clickable { cursor: pointer; }
+
+/* Links to the title's Seerr page */
+.sc-link { color: inherit; text-decoration: none; }
+.sc-link:hover { color: var(--sc-accent); text-decoration: underline; }
+.sc-link--out { font-weight: 400; opacity: 0.7; }
+
+/* Seasons nested under an expanded show: an accent rail ties them to the show row */
+.sc-row--group.is-open { border-bottom-color: var(--sc-accent); }
+.sc-nest {
+  margin: 0 0 0 18px; 
+  padding-left: 0; 
+  border-left: 3px solid var(--sc-accent);
+  border-bottom: 2px solid color-mix(in srgb, var(--sc-accent), #000 70%);
+  background: rgba(255, 255, 255, 0.03); 
+  border-radius: 0 0 0 0.5rem;
+}
+/* .sc-nest .sc-row--child { padding-left: 0; } */
+.sc-nest .sc-row:last-child { border-bottom: 0; }

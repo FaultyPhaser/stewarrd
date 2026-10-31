@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stewarrd</title>
+  <link rel="icon" type="image/png" href="<%= assetBase %>/images/logo.png">
+  <link rel="apple-touch-icon" href="<%= assetBase %>/images/logo.png">
+  <link rel="stylesheet" href="<%= assetBase %>/dashboard.css">
+</head>
+<body data-api="<%= apiBase %>" data-asset-base="<%= assetBase %>" data-dev-mode="<%= devMode %>" data-admin-run="<%= adminRun %>" data-fake-login="<%= fakeLogin %>">
+  <!-- The interface lives in web/dashboard and is built into public/dashboard.js. -->
+  <div id="app"></div>
+  <script src="<%= assetBase %>/dashboard.js" defer></script>
+</body>
+</html>
